@@ -5,7 +5,7 @@ class REST::InstanceSerializer < ActiveModel::Serializer
 
   attributes :uri, :title, :short_description, :description, :email,
              :version, :urls, :stats, :thumbnail,
-             :languages, :registrations, :approval_required, :invites_enabled
+             :languages, :registrations, :max_toot_chars, :approval_required, :invites_enabled    #魔改增加最大嘟文字数限制
 
   has_one :contact_account, serializer: REST::AccountSerializer
 
@@ -57,6 +57,10 @@ class REST::InstanceSerializer < ActiveModel::Serializer
 
   def registrations
     Setting.registrations_mode != 'none' && !Rails.configuration.x.single_user_mode
+  end
+
+  def max_toot_chars
+    10009               # 魔改增加最大嘟嘟字数限制，adding the new limit to Mastodon's API,so apps like Tusky don't keep it at 500
   end
 
   def approval_required
