@@ -10,7 +10,8 @@
   -ms-user-select: none;
 }
 
-.notification .status__avatar::before,
+/* TL头像猫耳转圈圈*/
+.notification .status__avatar::before, 
 .notification .status__avatar::after {
   display: none !important;
 }
@@ -25,7 +26,7 @@
   box-sizing: border-box;
   width: 50%;
   height: 50%;
-  background-color: inherit;
+  background-color: #FFE4B5;
   border-color: inherit;
   position: absolute;
   z-index: 0;
@@ -111,3 +112,85 @@
   75% { transform: rotate(-0deg) skew(-30deg); }
   to { transform: rotate(-37.6deg) skew(-30deg); }
 }
+
+
+/*emoji enlarge*/
+.reply-indicator__content .emojione, 
+.status__content .emojione {
+	width: 35px !important;
+	height: 35px !important;
+}
+
+.emoji-mart-category .emoji-mart-emoji:hover span {
+	width: 32px !important;
+	height: 32px !important;
+}
+
+.emoji-mart-category .emoji-mart-emoji:hover {
+	margin: 0 -10px;
+}
+
+
+/*mastodon长图补丁 v2.1 by Shioko*/
+.image-loader {
+	align-items:center;
+}
+.zoomable-image {
+	display: flex;
+    height:auto;
+	max-height: 100%;
+    width: auto;
+    max-width: 98%;
+	overflow: auto !important;
+	align-items:center;
+}
+.zoomable-image:hover {
+	align-items: flex-start;
+}
+
+.zoomable-image img {
+	max-height: 100%;
+    max-width:100%;
+}
+.zoomable-image img:hover {
+	max-height: 2000%;
+    max-width:100%;
+}
+
+
+/*variable width*/
+div.column {
+ -webkit-box-flex:1;
+ -ms-flex-positive:1;
+ flex-grow:1
+}
+
+/*hashtag style by slashine 071320*/
+.mention.hashtag{
+  background-color: rgba(244, 67, 54, 0.2);
+  padding: 0px 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-style: dashed;
+  border-color: orange;
+  border-width: 0.5px;
+  border-radius: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  }
+  /* profile style - @tag by slashine 071320*/
+  .account__header__content a.u-url {
+  color: inherit;
+  background: rgba(54, 136, 244, 0.2);
+  padding: 0px 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-style: dashed;
+  border-color: rgb(136, 136, 255);
+  border-width: 0.5px;
+  border-radius: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  }
