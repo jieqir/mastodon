@@ -62,7 +62,7 @@ class REST::InstanceSerializer < ActiveModel::Serializer
   def max_toot_chars
     10009               # 魔改增加最大嘟嘟字数限制，adding the new limit to Mastodon's API,so apps like Tusky don't keep it at 500
   end
-
+  
   def approval_required
     Setting.registrations_mode == 'approved'
   end
