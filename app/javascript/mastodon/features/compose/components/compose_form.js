@@ -238,8 +238,7 @@ class ComposeForm extends ImmutablePureComponent {
           </div>
         </AutosuggestTextarea>
 
-        // 魔改CharacterCounter为10009，嘟文字数上限
-        <div className='compose-form__buttons-wrapper'>
+          <div className='compose-form__buttons-wrapper'>
           <div className='compose-form__buttons'>
             <UploadButtonContainer />
             <PollButtonContainer />
@@ -257,3 +256,4 @@ class ComposeForm extends ImmutablePureComponent {
   }
 
 }
+// 魔改CharacterCounter为10009，嘟文字数上限
