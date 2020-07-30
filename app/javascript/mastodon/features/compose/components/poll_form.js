@@ -150,6 +150,7 @@ class PollForm extends ImmutablePureComponent {
 
     const autoFocusIndex = options.indexOf('');
 
+    //修改了选项数量
     return (
       <div className='compose-form__poll-wrapper'>
         <ul>

@@ -88,8 +88,9 @@ class ComposeForm extends ImmutablePureComponent {
     const { isSubmitting, isChangingUpload, isUploading, anyMedia } = this.props;
     const fulltext = [this.props.spoilerText, countableText(this.props.text)].join('');
 
+    // 魔改CharacterCounter为10009，嘟文字数上限
     if (isSubmitting || isUploading || isChangingUpload || length(fulltext) > 10009 || (fulltext.length !== 0 && fulltext.trim().length === 0 && !anyMedia)) {
-      return;   # 魔改CharacterCounter为10009，嘟文字数上限
+      return;  
     }
 
     this.props.onSubmit(this.context.router ? this.context.router.history : null);
@@ -177,12 +178,13 @@ class ComposeForm extends ImmutablePureComponent {
     this.props.onPickEmoji(position, data, needsSpace);
   }
 
+  // 魔改CharacterCounter为10009，嘟文字数上限
   render () {
     const { intl, onPaste, showSearch, anyMedia } = this.props;
     const disabled = this.props.isSubmitting;
     const text     = [this.props.spoilerText, countableText(this.props.text)].join('');
     const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > 10009 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);   # 魔改length为10009，嘟文字数上限
-    let publishText = '';  # 魔改CharacterCounter为10009，嘟文字数上限
+    let publishText = '';  
 
     if (this.props.privacy === 'private' || this.props.privacy === 'direct') {
       publishText = <span className='compose-form__publish-private'><Icon id='lock' /> {intl.formatMessage(messages.publish)}</span>;
