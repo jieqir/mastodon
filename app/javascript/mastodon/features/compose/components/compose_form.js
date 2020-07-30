@@ -183,7 +183,7 @@ class ComposeForm extends ImmutablePureComponent {
     const { intl, onPaste, showSearch, anyMedia } = this.props;
     const disabled = this.props.isSubmitting;
     const text     = [this.props.spoilerText, countableText(this.props.text)].join('');
-    const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > 10009 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);   # 魔改length为10009，嘟文字数上限
+    const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > 10009 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);  
     let publishText = '';  
 
     if (this.props.privacy === 'private' || this.props.privacy === 'direct') {
@@ -238,6 +238,7 @@ class ComposeForm extends ImmutablePureComponent {
           </div>
         </AutosuggestTextarea>
 
+        // 魔改CharacterCounter为10009，嘟文字数上限
         <div className='compose-form__buttons-wrapper'>
           <div className='compose-form__buttons'>
             <UploadButtonContainer />
@@ -245,7 +246,7 @@ class ComposeForm extends ImmutablePureComponent {
             <PrivacyDropdownContainer />
             <SpoilerButtonContainer />
           </div>
-          <div className='character-counter__wrapper'><CharacterCounter max={10009} text={text} /></div>   # 魔改CharacterCounter为10009，嘟文字数上限
+          <div className='character-counter__wrapper'><CharacterCounter max={10009} text={text} /></div>   
         </div>
 
         <div className='compose-form__publish'>
