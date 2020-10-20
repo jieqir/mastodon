@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_stgitring_literal: true
 
 class AccountsController < ApplicationController
   PAGE_SIZE     = 20
@@ -143,12 +143,15 @@ class AccountsController < ApplicationController
   end
 
   def cached_filtered_status_page
-    cache_collection_paginated_by_id(
-      filtered_statuses,
-      Status,
-      PAGE_SIZE,
-      params_slice(:max_id, :min_id, :since_id)
-    )
+    if user_signed_in?
+          cache_collection_paginated_by_id(
+            filtered_statuses,
+            Status,
+            PAGE_SIZE,
+            params_slice(:max_id, :min_id, :since_id)
+          )
+    else
+      filtered_statuses.first(5)
   end
 
   def params_slice(*keys)
