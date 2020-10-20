@@ -152,6 +152,7 @@ class AccountsController < ApplicationController
           )
     else
       filtered_statuses.first(5)
+    end
   end
 
   def params_slice(*keys)
