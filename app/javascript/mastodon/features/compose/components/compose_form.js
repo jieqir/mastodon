@@ -77,6 +77,18 @@ class ComposeForm extends ImmutablePureComponent {
     }
   }
 
+  getFulltextForCharacterCounting = () => {
+    return [this.props.spoiler? this.props.spoilerText: '', countableText(this.props.text)].join('');
+  }
+
+  canSubmit = () => {
+    const { isSubmitting, isChangingUpload, isUploading, anyMedia } = this.props;
+    const fulltext = this.getFulltextForCharacterCounting();
+    const isOnlyWhitespace = fulltext.length !== 0 && fulltext.trim().length === 0;
+
+    return !(isSubmitting || isUploading || isChangingUpload || length(fulltext) > 500 || (isOnlyWhitespace && !anyMedia));
+  }
+
   handleSubmit = () => {
     if (this.props.text !== this.autosuggestTextarea.textarea.value) {
       // Something changed the text inside the textarea (e.g. browser extensions like Grammarly)
@@ -84,13 +96,8 @@ class ComposeForm extends ImmutablePureComponent {
       this.props.onChange(this.autosuggestTextarea.textarea.value);
     }
 
-    // Submit disabled:
-    const { isSubmitting, isChangingUpload, isUploading, anyMedia } = this.props;
-    const fulltext = [this.props.spoilerText, countableText(this.props.text)].join('');
-
-    // 魔改CharacterCounter为10009，嘟文字数上限
-    if (isSubmitting || isUploading || isChangingUpload || length(fulltext) > 10009 || (fulltext.length !== 0 && fulltext.trim().length === 0 && !anyMedia)) {
-      return;  
+    if (!this.canSubmit()) {
+      return;
     }
 
     this.props.onSubmit(this.context.router ? this.context.router.history : null);
@@ -180,11 +187,9 @@ class ComposeForm extends ImmutablePureComponent {
 
   // 魔改CharacterCounter为10009，嘟文字数上限
   render () {
-    const { intl, onPaste, showSearch, anyMedia } = this.props;
+    const { intl, onPaste, showSearch } = this.props;
     const disabled = this.props.isSubmitting;
-    const text     = [this.props.spoilerText, countableText(this.props.text)].join('');
-    const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > 10009 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);  
-    let publishText = '';  
+    let publishText = '';
 
     if (this.props.privacy === 'private' || this.props.privacy === 'direct') {
       publishText = <span className='compose-form__publish-private'><Icon id='lock' /> {intl.formatMessage(messages.publish)}</span>;
@@ -245,11 +250,11 @@ class ComposeForm extends ImmutablePureComponent {
             <PrivacyDropdownContainer />
             <SpoilerButtonContainer />
           </div>
-          <div className='character-counter__wrapper'><CharacterCounter max={10009} text={text} /></div>   
+          <div className='character-counter__wrapper'><CharacterCounter max={500} text={this.getFulltextForCharacterCounting()} /></div>
         </div>
 
         <div className='compose-form__publish'>
-          <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabledButton} block /></div>
+          <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={!this.canSubmit()} block /></div>
         </div>
       </div>
     );
