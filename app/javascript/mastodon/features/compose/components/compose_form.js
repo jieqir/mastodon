@@ -185,7 +185,6 @@ class ComposeForm extends ImmutablePureComponent {
     this.props.onPickEmoji(position, data, needsSpace);
   }
 
-  // 魔改CharacterCounter为10009，嘟文字数上限
   render () {
     const { intl, onPaste, showSearch } = this.props;
     const disabled = this.props.isSubmitting;
@@ -250,9 +249,10 @@ class ComposeForm extends ImmutablePureComponent {
             <PrivacyDropdownContainer />
             <SpoilerButtonContainer />
           </div>
-          <div className='character-counter__wrapper'><CharacterCounter max={500} text={this.getFulltextForCharacterCounting()} /></div>
+          <div className='character-counter__wrapper'><CharacterCounter max={10009} text={this.getFulltextForCharacterCounting()} /></div>
         </div>
-
+        // 魔改CharacterCounter为10009，嘟文字数上限
+         
         <div className='compose-form__publish'>
           <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={!this.canSubmit()} block /></div>
         </div>
@@ -261,4 +261,3 @@ class ComposeForm extends ImmutablePureComponent {
   }
 
 }
-// 魔改CharacterCounter为10009，嘟文字数上限
