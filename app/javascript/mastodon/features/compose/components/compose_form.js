@@ -251,8 +251,7 @@ class ComposeForm extends ImmutablePureComponent {
           </div>
           <div className='character-counter__wrapper'><CharacterCounter max={10009} text={this.getFulltextForCharacterCounting()} /></div>
         </div>
-        // 魔改CharacterCounter为10009，嘟文字数上限
-         
+               
         <div className='compose-form__publish'>
           <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={!this.canSubmit()} block /></div>
         </div>
